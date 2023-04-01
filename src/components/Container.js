@@ -5,8 +5,8 @@ import { dimensions } from "../style/dimensions";
 import { StatusBar } from "expo-status-bar";
 import Button from "./Button";
 export default function Container({ children }) {
-  const colorMode = useSelector((state) => state.config.colorMode);
-  const colors = useSelector((state) => state.config.colors);
+  const colorMode = useSelector((state) => state.theme.colorMode);
+  const colors = useSelector((state) => state.theme.colors);
 
   return (
     <View

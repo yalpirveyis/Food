@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import configReducer from "./slicer/configSlice";
+import themeReduce from "./slicer/themeSlice";
 
 export const store = configureStore({
-  reducer: { config: configReducer },
+  reducer: { theme: themeReduce },
 });

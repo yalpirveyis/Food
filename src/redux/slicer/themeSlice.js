@@ -6,8 +6,8 @@ const initialState = {
   colors: Dark,
 };
 
-export const configSlice = createSlice({
-  name: "config",
+export const themeSlice = createSlice({
+  name: "theme",
   initialState,
   reducers: {
     changeColorMode: (state) => {
@@ -18,6 +18,6 @@ export const configSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { changeColorMode } = configSlice.actions;
+export const { changeColorMode } = themeSlice.actions;
 
-export default configSlice.reducer;
+export default themeSlice.reducer;
