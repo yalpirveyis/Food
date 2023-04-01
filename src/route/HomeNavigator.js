@@ -1,38 +1,22 @@
-import { Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Button from "../components/Button";
+import Home from "../pages/Home";
+import Register from "../pages/RegisterSteps";
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-      <Button />
-    </View>
-  );
-};
-const SettingsScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-};
 const HomeStack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="Home"
-        component={HomeScreen}
+        name="RegisterScreen"
+        component={Register}
         options={() => {
           return { headerShown: false };
         }}
       />
-
       <HomeStack.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="HomeScreen"
+        component={Home}
         options={() => {
           return { headerShown: false };
         }}

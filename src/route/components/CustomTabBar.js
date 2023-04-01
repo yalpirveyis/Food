@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { useSelector } from "react-redux";
 
 function CustomTabBar({ state, descriptors, navigation }) {
@@ -21,13 +15,20 @@ function CustomTabBar({ state, descriptors, navigation }) {
     Recipe_Active: require("../../assets/Icons/Recipe_Active.png"),
   };
   const colors = useSelector((state) => state.theme.colors);
-
+  const tabBarVisibility = useSelector((state) => state.theme.tabBarVisibility);
+  const hitSlop = { top: 20, left: 20, bottom: 20, right: 20 };
   return (
-    <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-around",
+        height: tabBarVisibility ? 0 : Platform.OS === "ios" ? 80 : 64,
+        borderTopWidth: 0.5,
+        borderTopColor: colors.lightText,
+      }}
+    >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        // const source = require(`../../assets/Icons/${route.name}.png`);
-        console.log("options.tabBarLabel", route);
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -58,14 +59,17 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
         return (
           <View
+            key={label}
             style={{
               flex: 1,
               alignItems: "center",
-              padding: 16,
+              paddingTop: 16,
+              paddingBottom: 4,
               backgroundColor: colors.foreground,
             }}
           >
             <TouchableOpacity
+              hitSlop={hitSlop}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -75,8 +79,8 @@ function CustomTabBar({ state, descriptors, navigation }) {
             >
               <Image
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 24,
+                  height: 24,
                   tintColor: isFocused
                     ? colors.buttonActive
                     : colors.tabbarPassive,
@@ -89,6 +93,13 @@ function CustomTabBar({ state, descriptors, navigation }) {
                 }
               />
             </TouchableOpacity>
+            {isFocused && (
+              <Text
+                style={{ color: colors.text, fontWeight: "600", fontSize: 12 }}
+              >
+                {label}
+              </Text>
+            )}
           </View>
         );
       })}

@@ -1,14 +1,12 @@
 import { Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { changeColorMode } from "../redux/slicer/themeSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function Button() {
-  const colorMode = useSelector((state) => state.theme.colorMode);
-  const dispatch = useDispatch();
+export default function Button({ onPress, label, hitSlop }) {
+  const colors = useSelector((state) => state.theme.colors);
   return (
-    <TouchableOpacity onPress={() => dispatch(changeColorMode())}>
-      <Text>Button,{colorMode}</Text>
+    <TouchableOpacity onPress={onPress} hitSlop={hitSlop}>
+      <Text style={{ color: colors.text }}>{label}</Text>
     </TouchableOpacity>
   );
 }
