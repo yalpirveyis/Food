@@ -1,12 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { dimensions } from "./src/style/dimensions";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
+import Container from "./src/components/Container";
 
 export default function App() {
   return (
-    <View style={{ marginTop: dimensions.statusbar }}>
-      <Text>Food Recipe App!</Text>
-      <StatusBar style="light" backgroundColor="red" />
-    </View>
+    <Provider store={store}>
+      <Container />
+    </Provider>
   );
 }
